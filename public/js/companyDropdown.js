@@ -1,3 +1,15 @@
+// import "https://keshavsoft.github.io/json-renderers/dist/v5/min.js";
+import "https://cdn.jsdelivr.net/gh/keshavsoft/json-renderers@main/docs/dist/v5/min.js";
+
+const createSelect = (localSelectId, uniqueCompanies) => {
+    debugger;
+    window.ks.jsonRenderers.renderToDom({
+        type: "select", data: { LedgerName: uniqueCompanies },
+        targetHtmlId: localSelectId,
+        classToApply: "control-select"
+    });
+
+};
 /**
  * Shared Dynamic Company Dropdown Loader
  * Queries /v2/ws/company and populates any <select> element.
@@ -36,13 +48,7 @@ export async function initCompanyDropdown({
         const uniqueCompanies = [...new Set(companyNames)];
 
         if (uniqueCompanies.length > 0) {
-            selectEl.innerHTML = "";
-            uniqueCompanies.forEach((comp) => {
-                const opt = document.createElement("option");
-                opt.value = comp;
-                opt.textContent = comp;
-                selectEl.appendChild(opt);
-            });
+            createSelect(localSelectId, uniqueCompanies);
 
             // Restore from localStorage or use default
             const saved = localStorage.getItem("selectedTallyCompany");
