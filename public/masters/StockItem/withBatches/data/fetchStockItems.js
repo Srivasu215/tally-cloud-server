@@ -1,4 +1,4 @@
-import { normalizeStockItems } from "./stockItemData.js";
+import { normalizeStockItems } from "./normalizeStockItems.js";
 
 const STOCK_ITEMS_ENDPOINT = "/v2/ws/StockItem.withBatches";
 
@@ -7,7 +7,7 @@ function getRawItems(payload) {
     return Array.isArray(payload?.data) ? payload.data : [];
 }
 
-/** Fetch a company's items and return the original payload plus canonical items. */
+/** The API boundary returns the original payload and normalized screen content. */
 export async function fetchStockItems(companyName) {
     const company = String(companyName ?? "").trim();
     const url = `${STOCK_ITEMS_ENDPOINT}?company=${encodeURIComponent(company)}`;
@@ -18,7 +18,8 @@ export async function fetchStockItems(companyName) {
     }
 
     const payload = await response.json();
-    const items = normalizeStockItems(getRawItems(payload));
-
-    return { payload, items };
+    return {
+        payload,
+        items: normalizeStockItems(getRawItems(payload))
+    };
 }
