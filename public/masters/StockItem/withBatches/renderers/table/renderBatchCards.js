@@ -1,8 +1,8 @@
 import { escapeHtml } from "../escapeHtml.js";
 
-export function renderBatchCards(batches) {
+export function renderBatchCards(batches, tableFacts) {
     if (batches.length === 0) {
-        return '<span class="no-batch-muted"><i class="bi bi-dash-circle me-1"></i>No batch allocations</span>';
+        return `<span class="no-batch-muted"><i class="bi bi-dash-circle me-1"></i>${escapeHtml(tableFacts.emptyBatchFact)}</span>`;
     }
 
     const cards = batches.map((batch) => {
@@ -21,7 +21,7 @@ export function renderBatchCards(batches) {
             </div>
             <div class="batch-balance">${escapeHtml(batch.balance)}</div>
             <div class="batch-rate">${escapeHtml(batch.rate)}</div>
-            <div class="batch-val">₹ ${escapeHtml(value)}</div>
+            <div class="batch-val">${escapeHtml(tableFacts.currencyFact)} ${escapeHtml(value)}</div>
           </div>
         `;
     }).join("");

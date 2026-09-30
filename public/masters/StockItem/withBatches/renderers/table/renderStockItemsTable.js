@@ -29,5 +29,7 @@ export function renderStockItemsTable(schemaIds, tableFacts, items) {
         return;
     }
 
-    tableBody.innerHTML = items.map(renderStockItemRow).join("");
+    tableBody.innerHTML = items
+        .map((item, index) => renderStockItemRow(item, index, tableFacts))
+        .join("");
 }

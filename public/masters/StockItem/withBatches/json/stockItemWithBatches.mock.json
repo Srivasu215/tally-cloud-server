@@ -90,7 +90,11 @@
           "fact": "Batch Allocations (Batch Name • Godown • Balance • Rate • Value)"
         }
       ],
-      "emptyFact": "No matching stock items found for current filter."
+      "emptyFact": "No matching stock items found for current filter.",
+      "batchCountFact": "batch",
+      "batchCountPluralFact": "batches",
+      "emptyBatchFact": "No batch allocations",
+      "currencyFact": "₹"
     },
     "jsonSourceFact": "Mock JSON screen contract",
     "items": [
