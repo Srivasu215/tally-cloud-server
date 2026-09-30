@@ -1,4 +1,3 @@
-import { initCompanyDropdown } from "/js/companyDropdown.js";
 import { getJsonText, setCopyButtonState } from "../renderers/json/renderJsonExplorer.js";
 
 /** Connect user actions to page callbacks; renderers remain data-in, DOM-out. */
@@ -19,14 +18,6 @@ export function bindStockItemPageEvents({ screenDefinition, onFiltersChange, onF
     document.getElementById(controls.fetch)?.addEventListener("click", () => {
         const company = document.getElementById(controls.companyValue)?.value ?? facts.company.default;
         onFetch(company);
-    });
-
-    initCompanyDropdown({
-        inSelectElementId: controls.companyValue,
-        inDefaultCompany: facts.company.default,
-        inOnChange: ({ inCompany }) => onFetch(inCompany)
-    }).catch((error) => {
-        console.warn("Could not load live company options; the mock company remains available:", error);
     });
 
     bindViewTabs(tabs);
