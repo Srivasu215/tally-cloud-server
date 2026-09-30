@@ -1,8 +1,10 @@
 // import "https://keshavsoft.github.io/json-renderers/dist/v5/min.js";
-import "https://cdn.jsdelivr.net/gh/keshavsoft/json-renderers@main/docs/dist/v5/min.js";
+import "https://cdn.jsdelivr.net/gh/keshavsoft/json-renderers@main/docs/dist/v6/min.js";
 
 const createSelect = (localSelectId, uniqueCompanies) => {
-    debugger;
+
+    console.log("localSelectId, uniqueCompanies : ", localSelectId, uniqueCompanies);
+
     window.ks.jsonRenderers.renderToDom({
         type: "select", data: { LedgerName: uniqueCompanies },
         targetHtmlId: localSelectId,
@@ -37,7 +39,8 @@ export async function initCompanyDropdown({
         }
 
         const payload = await response.json();
-        const rawList = Array.isArray(payload) ? payload : (payload.data || []);
+        // debugger
+        const rawList = Array.isArray(payload) ? payload : (payload.data.companies || []);
 
         const companyNames = rawList.map((item) => {
             if (typeof item === "string") return item.trim();
