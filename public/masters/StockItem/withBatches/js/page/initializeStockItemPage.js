@@ -24,6 +24,7 @@ export function initializeStockItemPage(screenDefinition) {
             schemaIds,
             facts,
             metrics,
+            allItems: state.items,
             visibleItems,
             status: state.status,
             jsonPayload: state.jsonPayload,
@@ -41,7 +42,7 @@ export function initializeStockItemPage(screenDefinition) {
             const { payload, items } = await fetchStockItems(company);
             state.items = items;
             state.jsonPayload = payload;
-            state.jsonSourceFact = "/v2/ws/StockItem.withBatches response";
+            state.jsonSourceFact = "/v2/ws/masters.StockItem.withBatches response";
             state.status = {
                 state: "ready",
                 message: `Loaded ${items.length} items (${new Date().toLocaleTimeString()})`

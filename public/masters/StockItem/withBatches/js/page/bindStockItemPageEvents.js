@@ -25,34 +25,32 @@ export function bindStockItemPageEvents({ screenDefinition, onFiltersChange, onF
         inSelectElementId: controls.companyValue,
         inDefaultCompany: facts.company.default,
         inOnChange: ({ inCompany }) => onFetch(inCompany)
+    }).then((selectedCompany) => {
+        onFetch(selectedCompany);
     }).catch((error) => {
         console.warn("Could not load live company options; the mock company remains available:", error);
     });
 
-    bindViewTabs(tabs);
+    bindViewTabs(tabs.views);
     bindJsonCopy(json);
 }
 
-function bindViewTabs({ tableButton, jsonButton, tableView, jsonView }) {
-    const tableTab = document.getElementById(tableButton);
-    const jsonTab = document.getElementById(jsonButton);
-    const tablePanel = document.getElementById(tableView);
-    const jsonPanel = document.getElementById(jsonView);
+function bindViewTabs(viewDefinitions) {
+    const views = viewDefinitions.map(({ button, panel }) => ({
+        button: document.getElementById(button),
+        panel: document.getElementById(panel)
+    }));
 
-    if (!tableTab || !jsonTab || !tablePanel || !jsonPanel) return;
+    if (views.some(({ button, panel }) => !button || !panel)) return;
 
-    tableTab.addEventListener("click", () => {
-        tableTab.classList.add("active");
-        jsonTab.classList.remove("active");
-        tablePanel.style.display = "block";
-        jsonPanel.style.display = "none";
-    });
-
-    jsonTab.addEventListener("click", () => {
-        jsonTab.classList.add("active");
-        tableTab.classList.remove("active");
-        jsonPanel.style.display = "block";
-        tablePanel.style.display = "none";
+    views.forEach((activeView) => {
+        activeView.button.addEventListener("click", () => {
+            views.forEach(({ button, panel }) => {
+                const isActive = button === activeView.button;
+                button.classList.toggle("active", isActive);
+                panel.style.display = isActive ? "block" : "none";
+            });
+        });
     });
 }
 

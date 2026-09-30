@@ -1,6 +1,6 @@
 import { normalizeStockItems } from "./normalizeStockItems.js";
 
-const STOCK_ITEMS_ENDPOINT = "/v2/ws/StockItem.withBatches";
+const STOCK_ITEMS_ENDPOINT = "/v2/ws/masters.StockItem.withBatches";
 
 function getRawItems(payload) {
     if (Array.isArray(payload)) return payload;

@@ -22,10 +22,11 @@
       }
     },
     "tabs": {
-      "tableButton": "tabTable",
-      "jsonButton": "tabJson",
-      "tableView": "tableView",
-      "jsonView": "jsonView"
+      "views": [
+        { "button": "tabTable", "panel": "tableView" },
+        { "button": "tabJson", "panel": "jsonView" },
+        { "button": "tabRootItems", "panel": "rootItemsView" }
+      ]
     },
     "table": {
       "element": "stockItemsTable",
@@ -37,6 +38,11 @@
         "baseUnit": "tableHeaderBaseUnit",
         "batches": "tableHeaderBatches"
       }
+    },
+    "rootItemsTable": {
+      "element": "rootItemsTable",
+      "headerRow": "rootItemsHeaderRow",
+      "body": "rootItemsBody"
     },
     "json": {
       "sourceLabel": "jsonSourceLabel",
@@ -95,6 +101,10 @@
       "batchCountPluralFact": "batches",
       "emptyBatchFact": "No batch allocations",
       "currencyFact": "₹"
+    },
+    "rootItemsTable": {
+      "headerFact": "Stock Item Name",
+      "emptyFact": "No stock items available."
     },
     "jsonSourceFact": "Mock JSON screen contract",
     "items": [

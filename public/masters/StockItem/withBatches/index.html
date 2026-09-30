@@ -100,6 +100,9 @@
       <button class="tab-btn" data-tab="jsonView" id="tabJson">
         <i class="bi bi-code-slash"></i> Raw JSON Explorer
       </button>
+      <button class="tab-btn" data-tab="rootItemsView" id="tabRootItems">
+        <i class="bi bi-list-ul"></i> All Stock Items
+      </button>
     </nav>
 
     <!-- Table Container -->
@@ -123,6 +126,18 @@
         </button>
       </div>
       <pre class="json-viewer-container" id="jsonViewerContent"></pre>
+    </section>
+
+    <!-- Flat root-item list without batch details -->
+    <section id="rootItemsView" class="data-card" style="display: none;">
+      <div class="table-responsive">
+        <table class="custom-table" id="rootItemsTable">
+          <thead>
+            <tr id="rootItemsHeaderRow"></tr>
+          </thead>
+          <tbody id="rootItemsBody"></tbody>
+        </table>
+      </div>
     </section>
   </main>
 

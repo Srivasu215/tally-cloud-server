@@ -3,6 +3,7 @@ import { renderCompanySelector } from "./controls/renderCompanySelector.js";
 import { renderBatchOnlyFilterLabel } from "./filters/renderBatchOnlyFilterLabel.js";
 import { renderJsonExplorer } from "./json/renderJsonExplorer.js";
 import { renderConnectionStatus } from "./status/renderConnectionStatus.js";
+import { renderRootStockItemsTable } from "./table/renderRootStockItemsTable.js";
 import { renderStockItemsTable } from "./table/renderStockItemsTable.js";
 
 /** Assemble the page by passing each screen section to its focused renderer. */
@@ -10,6 +11,7 @@ export function renderStockItemScreen({
     schemaIds,
     facts,
     metrics,
+    allItems,
     visibleItems,
     status,
     jsonPayload,
@@ -30,5 +32,6 @@ export function renderStockItemScreen({
         metrics.itemsWithBatches
     );
     renderStockItemsTable(schemaIds.table, facts.table, visibleItems);
+    renderRootStockItemsTable(schemaIds.rootItemsTable, facts.rootItemsTable, allItems);
     renderJsonExplorer(schemaIds.json, jsonSourceFact, jsonPayload);
 }
