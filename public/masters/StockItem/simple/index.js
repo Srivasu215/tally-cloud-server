@@ -1,24 +1,15 @@
-import render from "/json-render-table/src/index.js";
+import { render } from "https://keshavsoft.github.io/json-render-table/dist/v8/min.js";
 
-async function loadStockItems({ inJsonUrl }) {
-    const localJsonUrl = inJsonUrl;
-    const response = await fetch(localJsonUrl);
-    if (!response.ok) {
-        throw new Error(`HTTP ${response.status} ${response.statusText}`);
-    }
-    return await response.json();
-}
+import stockItems from './stockItems.json' with {type: 'json'};
 
 async function startFunc({ inTargetHtmlId, inJsonUrl }) {
     const localTargetHtmlId = inTargetHtmlId;
     const localJsonUrl = inJsonUrl;
 
     try {
-        const localStockItems = await loadStockItems({ inJsonUrl: localJsonUrl });
-
         render({
             flavor: "simple",
-            data: localStockItems,
+            data: stockItems,
             columns: ["itemName", "baseUnit"],
             targetHtmlId: localTargetHtmlId
         });
@@ -32,6 +23,5 @@ async function startFunc({ inTargetHtmlId, inJsonUrl }) {
 }
 
 startFunc({
-    inTargetHtmlId: "dom-render-container",
-    inJsonUrl: "./stockItems.json"
-});
+    inTargetHtmlId: "rootItemsTable"
+}).then();
