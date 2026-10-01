@@ -34,6 +34,8 @@ export function initializeStockItemPage(screenDefinition) {
 
     async function fetchLiveItems(companyName) {
         const company = String(companyName ?? "").trim();
+        console.log("company : ", company);
+
         setFetchButtonLoading(schemaIds.controls.fetch, true);
         state.status = { state: "loading", message: `Fetching for "${company}"...` };
         renderPage();
