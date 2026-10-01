@@ -1,0 +1,11 @@
+body {
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+#dom-render-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  background: #fff;
+}
