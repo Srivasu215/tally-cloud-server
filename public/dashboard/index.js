@@ -1,4 +1,40 @@
+import companyPull from "./companyDropdown.js";
+// import unitsPull from "./js/units/index.js";
+
 import spec from "./spec.json" with { type: "json" };
+
+// import "https://cdn.jsdelivr.net/gh/keshavsoft/json-renderers@main/docs/dist/v10/min.js";
+
+async function fetchData(url) {
+    try {
+        // 1. Wait for the initial network response
+        const response = await fetch(url);
+
+        // 2. Check if the HTTP status code is valid (200-299)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // 3. Wait for the body stream to be completely read and parsed as JSON
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        // Captures network failures or thrown errors from above
+        console.error("Fetch operation failed:", error);
+    }
+}
+
+// Usage:
+
+let jFLocalcompanySelect = () => {
+    let jVarLocalcompanySelect = 'companySelect'
+    let jVarLocalHtmlId = document.getElementById(jVarLocalcompanySelect);
+
+    if (jVarLocalHtmlId === null === false) {
+        return jVarLocalHtmlId.value.trim();
+    };
+};
 
 const startFunc = () => {
     try {
@@ -9,14 +45,28 @@ const startFunc = () => {
         const cont1 = document.getElementById("body");
         cont1.prepend(...createDomElement);
 
+        companyPull();
+
         let jVarLocalunitsSideId = document.getElementById('unitsSideId');
 
-        jVarLocalunitsSideId.addEventListener("click", (event) => {
-            alert("fff")
+        jVarLocalunitsSideId.addEventListener("click", async (event) => {
+            const company = jFLocalcompanySelect();
+            console.log("company : ", company);
+
+            const fetchUrl = `http://localhost:9011/v2/ws/masters.StockItem.withBatches?company=${company}`;
+
+            const data = await fetchData(fetchUrl);
+
+            window.ks.jsonRenderers.renderToDom({
+                flavor: "simple",
+                data: data.data,
+                columns: ["itemName", "baseUnit"],
+                targetHtmlId: "ksContainerId"
+            });
         });
     } catch (err) {
         console.error("Failed to render v27 sample:", err);
-    }
+    };
 };
 
 startFunc();
