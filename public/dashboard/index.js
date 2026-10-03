@@ -51,9 +51,9 @@ const startFunc = () => {
 
         jVarLocalunitsSideId.addEventListener("click", async (event) => {
             const company = jFLocalcompanySelect();
-            console.log("company : ", company);
+            // console.log("company : ", company);
 
-            const fetchUrl = `http://localhost:9011/v2/ws/masters.StockItem.withBatches?company=${company}`;
+            const fetchUrl = `/v2/ws/masters.StockItem.withBatches?company=${company}`;
 
             const data = await fetchData(fetchUrl);
 
